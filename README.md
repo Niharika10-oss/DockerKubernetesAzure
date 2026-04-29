@@ -1,3 +1,4 @@
+Repo link: Docker Hub – https://hub.docker.com/repository/docker/niharikakolarkar/sample-html-app/general
 ⚙️ Environment Preparation
 1- Before building and running this project, make sure your environment is ready: Install Docker Desktop. Download from Docker official site (docker.com in Bing).
 Verify installation: docker --version
