@@ -33,7 +33,7 @@ az acr repository show-tags --name <YourRegsitryName> --repository sample-html-a
 CREATE AKS CLUSTER
 az aks create --resource-group MyResourceGroup --name MyAKSCluster101199 --node-count 1 --generate-ssh-keys
 CONNECT KUBECTL TO ACR
-az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster
+az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster101199
 Navigate to your project folder (where you want to keep the manifest) and create yaml file 
 notepad sample-html-app.yaml
 Paste the YAML content (Deployment + Service):
