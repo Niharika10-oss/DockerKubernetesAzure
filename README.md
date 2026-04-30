@@ -18,6 +18,16 @@ docker build -t sample-html-app:v1 .
 docker run -d -p 8080:80 sample-html-app:v1
 Open in browser: http://localhost:8080
 
+# 🚀 Docker → Azure Container Registry (ACR)
+This mini‑lab demonstrates how to build a Docker image locally and publish it to **Azure Container Registry (ACR)** for cloud deployment.
+### 1. Create Resource Group - az group create --name <YourRESOURCEgrpName> --location centralindia
+### 2. Create an ACR - az acr create --resource-group MyResourceGroup --name <yourUniqueRegistryName> --sku Basic
+### 3. az acr login --name YourRegistryName
+### 4. Here’s the correct single‑line format you should run in your local PowerShell terminal: 
+az acr import --name <YourRegsitryName> --source docker.io/niharikakolarkar/sample-html-app:v1 --image sample-html-app:v1
+I used this as due to n/w issue i wasnt able to tag and push large image. This uses image from docker hub and stores in ACR.
+### 5. Verify if image tagged and pushed 
+az acr repository show-tags --name <YourRegsitryName> --repository sample-html-app --output table
 
 
 
