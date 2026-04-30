@@ -29,6 +29,68 @@ I used this as due to n/w issue i wasnt able to tag and push large image. This u
 ### 5. Verify if image tagged and pushed 
 az acr repository show-tags --name <YourRegsitryName> --repository sample-html-app --output table
 
+## ☸️ Deploy to AKS (with ACR Integration)
+CREATE AKS CLUSTER
+az aks create --resource-group MyResourceGroup --name MyAKSCluster101199 --node-count 1 --generate-ssh-keys
+CONNECT KUBECTL TO ACR
+az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster
+Navigate to your project folder (where you want to keep the manifest) and create yaml file 
+notepad sample-html-app.yaml
+Paste the YAML content (Deployment + Service):
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-html-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-html-app
+  template:
+    metadata:
+      labels:
+        app: sample-html-app
+    spec:
+      containers:
+      - name: sample-html-app
+        image: niharikaacr101199.azurecr.io/sample-html-app:v1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-html-app-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: sample-html-app
+APPLY THE YAML FILE
+kubectl apply -f sample-html-app.yaml
+Verify Pod Status is running
+kubectl get pods
+Check Service External IP
+kubectl get service <Name In Service Block of YAML>
+check external IP if app is accessible
+### IF PODS ARENT RUNNING AND EXTERNAL IP NOT REACHABLE
+1. **Attach ACR to AKS**
+   ```powershell
+az aks update -n MyAKSCluster101199 -g MyResourceGroup --attach-acr niharikaacr101199
+2. Redeploy Pods
+kubectl delete pod -l app=sample-html-app
+kubectl apply -f sample-html-app.yaml
+3. Verify Pod Status is running
+kubectl get pods 
+4. Check Service External IP
+kubectl get service <Name In Service Block of YAML>
+###✅ Outcome
+1. AKS cluster successfully connected to ACR (niharikaacr101199).
+2. Pods redeployed and running with image sample-html-app:v1.
+3. Application exposed via LoadBalancer service and reachable at external IP.
+
 
 
 
