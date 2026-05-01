@@ -90,6 +90,19 @@ kubectl get service <Name In Service Block of YAML>
 1. AKS cluster successfully connected to ACR (niharikaacr101199).
 2. Pods redeployed and running with image sample-html-app:v1.
 3. Application exposed via LoadBalancer service and reachable at external IP.
+____________________________________________________________________________________________________________________________________________________
+🚀 Pipeline Automation (Azure DevOps) 
+end‑to‑end CI/CD automation using Azure DevOps pipelines to build, push, and deploy a containerized web app on AKS.
+Build & Push Stage
+1. Automated Docker image build from a minimal nginx‑based Dockerfile.
+2. Resolved push failures to Azure Container Registry by switching to Docker Hub as large images were getting blocked by n/w.
+3. Configured a secure Docker Hub service connection in Azure DevOps.
+Deploy Stage
+1. Applied Kubernetes manifests directly from the pipeline.
+2. Fixed deployment errors (azureSubscriptionEndpoint missing) by creating a manual Azure Resource Manager service connection with a service principal.
+3. Verified successful rollout with a public LoadBalancer IP (http://20.207.113.205).
+
+
 
 
 
