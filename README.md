@@ -90,7 +90,7 @@ kubectl get service <Name In Service Block of YAML>
 1. AKS cluster successfully connected to ACR (niharikaacr101199).
 2. Pods redeployed and running with image sample-html-app:v1.
 3. Application exposed via LoadBalancer service and reachable at external IP.
-____________________________________________________________________________________________________________________________________________________
+
 🚀 Pipeline Automation (Azure DevOps) 
 end‑to‑end CI/CD automation using Azure DevOps pipelines to build, push, and deploy a containerized web app on AKS.
 Build & Push Stage
